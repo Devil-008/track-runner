@@ -1,0 +1,194 @@
+/* ============================================
+   TRACK COMPONENT STYLES
+   ============================================ */
+
+.track-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  perspective: 500px;
+  overflow: hidden;
+}
+
+.track {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 350px;
+  height: 100%;
+  transform: translateX(-50%) rotateX(60deg);
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+}
+
+/* Track Surface */
+.track-surface {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  background: linear-gradient(180deg, 
+    #1a1a2e 0%, 
+    #2d2d44 30%,
+    #16213e 100%
+  );
+  border-left: 4px solid #4a4a6a;
+  border-right: 4px solid #4a4a6a;
+}
+
+/* Track Lines */
+.track-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  overflow: hidden;
+}
+
+.track-line {
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 50px;
+  background: #FFD93D;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+}
+
+/* Lane Dividers */
+.lane-divider {
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  height: 800px;
+  background: repeating-linear-gradient(
+    to top,
+    transparent 0px,
+    transparent 30px,
+    #4a4a6a 30px,
+    #4a4a6a 60px
+  );
+}
+
+.lane-divider.left {
+  left: 33%;
+}
+
+.lane-divider.right {
+  left: 66%;
+}
+
+/* Rails */
+.track-rail {
+  position: absolute;
+  bottom: 0;
+  height: 800px;
+  width: 8px;
+  background: linear-gradient(90deg, #666 0%, #888 50%, #666 100%);
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+}
+
+.track-rail.left-outer {
+  left: 5%;
+}
+
+.track-rail.left-inner {
+  left: 15%;
+}
+
+.track-rail.right-inner {
+  right: 15%;
+}
+
+.track-rail.right-outer {
+  right: 5%;
+}
+
+/* Track Sleepers (horizontal wooden planks) */
+.track-sleepers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  background: repeating-linear-gradient(
+    to top,
+    transparent 0px,
+    transparent 35px,
+    #3d3d5c 35px,
+    #3d3d5c 45px
+  );
+  opacity: 0.5;
+}
+
+/* Animated moving effect */
+.track-lines,
+.lane-divider,
+.track-sleepers {
+  animation: trackMove 0.5s linear infinite;
+}
+
+@keyframes trackMove {
+  from {
+    transform: translateY(-60px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Track Glow */
+.track-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, 
+    rgba(255, 107, 53, 0.1) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Speed Lines Effect */
+.speed-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.speed-line {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 100%
+  );
+  animation: speedLine 0.3s linear infinite;
+}
+
+@keyframes speedLine {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,265 @@
+/* ============================================
+   PLAYER COMPONENT STYLES
+   ============================================ */
+
+.player-container {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  width: 60px;
+  height: 100px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+  z-index: 100;
+}
+
+.player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Character Body */
+.player-body {
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #FF6B35 0%, #E85A24 100%);
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.player-body::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 15px;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #FFD93D 0%, #FFC107 100%);
+  border-radius: 3px;
+}
+
+/* Character Head */
+.player-head {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  left: 50%;
+  top: -5px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #FFE4C4 0%, #DEB887 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Eyes */
+.player-head::before,
+.player-head::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  top: 12px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.player-head::before {
+  left: 8px;
+}
+
+.player-head::after {
+  right: 8px;
+}
+
+/* Hair */
+.player-hair {
+  position: absolute;
+  width: 38px;
+  height: 18px;
+  left: 50%;
+  top: -8px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #2C1810 0%, #1A0F0A 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+/* Legs */
+.player-legs {
+  position: absolute;
+  width: 100%;
+  height: 35px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.player-leg {
+  width: 14px;
+  height: 35px;
+  background: linear-gradient(180deg, #2C3E50 0%, #1A252F 100%);
+  border-radius: 4px;
+  transform-origin: top center;
+}
+
+/* Arms */
+.player-arms {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  left: 50%;
+  top: 25px;
+  transform: translateX(-50%);
+}
+
+.player-arm {
+  position: absolute;
+  width: 12px;
+  height: 30px;
+  background: linear-gradient(180deg, #FF6B35 0%, #E85A24 100%);
+  border-radius: 6px;
+  transform-origin: top center;
+}
+
+.player-arm.left {
+  left: 0;
+}
+
+.player-arm.right {
+  right: 0;
+}
+
+/* Running Animation */
+.player.running .player-leg:nth-child(1) {
+  animation: legRunLeft 0.3s ease-in-out infinite;
+}
+
+.player.running .player-leg:nth-child(2) {
+  animation: legRunRight 0.3s ease-in-out infinite;
+}
+
+.player.running .player-arm.left {
+  animation: armRunLeft 0.3s ease-in-out infinite;
+}
+
+.player.running .player-arm.right {
+  animation: armRunRight 0.3s ease-in-out infinite;
+}
+
+@keyframes legRunLeft {
+  0%, 100% { transform: rotate(-25deg); }
+  50% { transform: rotate(25deg); }
+}
+
+@keyframes legRunRight {
+  0%, 100% { transform: rotate(25deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+@keyframes armRunLeft {
+  0%, 100% { transform: rotate(30deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+@keyframes armRunRight {
+  0%, 100% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+}
+
+/* Jumping State */
+.player-container.jumping {
+  animation: playerJump 0.5s ease-out;
+}
+
+.player-container.jumping .player-leg {
+  transform: rotate(0deg) !important;
+  animation: none !important;
+}
+
+.player-container.jumping .player-arm {
+  transform: rotate(-60deg) !important;
+  animation: none !important;
+}
+
+@keyframes playerJump {
+  0% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-120px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+/* Sliding State */
+.player-container.sliding {
+  height: 40px;
+}
+
+.player-container.sliding .player {
+  transform: rotate(-90deg) translateY(20px);
+}
+
+.player-container.sliding .player-leg,
+.player-container.sliding .player-arm {
+  animation: none !important;
+}
+
+/* Lane Positions */
+.player-container.lane-0 {
+  transform: translateX(calc(-50% - 100px));
+}
+
+.player-container.lane-1 {
+  transform: translateX(-50%);
+}
+
+.player-container.lane-2 {
+  transform: translateX(calc(-50% + 100px));
+}
+
+/* Combined transforms for jumping */
+.player-container.lane-0.jumping {
+  animation: playerJumpLane0 0.5s ease-out;
+}
+
+.player-container.lane-2.jumping {
+  animation: playerJumpLane2 0.5s ease-out;
+}
+
+@keyframes playerJumpLane0 {
+  0% { transform: translateX(calc(-50% - 100px)) translateY(0); }
+  50% { transform: translateX(calc(-50% - 100px)) translateY(-120px); }
+  100% { transform: translateX(calc(-50% - 100px)) translateY(0); }
+}
+
+@keyframes playerJumpLane2 {
+  0% { transform: translateX(calc(-50% + 100px)) translateY(0); }
+  50% { transform: translateX(calc(-50% + 100px)) translateY(-120px); }
+  100% { transform: translateX(calc(-50% + 100px)) translateY(0); }
+}
+
+/* Shadow */
+.player-shadow {
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  left: 50%;
+  bottom: -15px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.player-container.jumping .player-shadow {
+  animation: shadowJump 0.5s ease-out;
+}
+
+@keyframes shadowJump {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.4; }
+  50% { transform: translateX(-50%) scale(0.5); opacity: 0.2; }
+  100% { transform: translateX(-50%) scale(1); opacity: 0.4; }
+}
